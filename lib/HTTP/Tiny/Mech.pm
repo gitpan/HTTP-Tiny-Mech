@@ -6,7 +6,7 @@ BEGIN {
   $HTTP::Tiny::Mech::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $HTTP::Tiny::Mech::VERSION = '0.1.2';
+  $HTTP::Tiny::Mech::VERSION = '0.1.3';
 }
 
 # ABSTRACT: Wrap a WWW::Mechanize instance in an HTTP::Tiny compatible interface.
@@ -50,7 +50,7 @@ sub _wrap_request {
 
 sub get {
   my ( $self, $uri, $opts ) = @_;
-  return $self->_unwrap_response( $self->mechua->get( $uri, $opts ) );
+  return $self->_unwrap_response( $self->mechua->get( $uri, ($opts? %{$opts} : ()) ) );
 }
 
 
@@ -67,6 +67,7 @@ no Moose;
 1;
 
 __END__
+
 =pod
 
 =encoding utf-8
@@ -77,7 +78,7 @@ HTTP::Tiny::Mech - Wrap a WWW::Mechanize instance in an HTTP::Tiny compatible in
 
 =head1 VERSION
 
-version 0.1.2
+version 0.1.3
 
 =head1 SYNOPSIS
 
@@ -120,16 +121,25 @@ Interface should be the same as it is with L<HTTP::Tiny/get>.
 
 Interface should be the same as it is with L<HTTP::Tiny/request>
 
-=head1 AUTHOR
+=head1 AUTHORS
+
+=over 4
+
+=item *
 
 Kent Fredric <kentnl@cpan.org>
 
+=item *
+
+Pedro Melo <melo@simplicidade.org>
+
+=back
+
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2012 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
